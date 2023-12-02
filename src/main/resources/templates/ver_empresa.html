@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Empresas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start; /* Alinea la tabla más arriba */
+      min-height: 100vh;
+    }
+
+    #contenedor {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #1a4a6a;
+      color: #fff;
+    }
+
+    .accion {
+      cursor: pointer;
+      color: #3498db;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="contenedor">
+    <h2>Lista de Empresas</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>RUT Empresa</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Nombre Encargado</th>
+          <th>RUT Encargado</th>
+          <th>Razón Social</th>
+          <th>Teléfono Empresa</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Aquí puedes agregar dinámicamente filas con datos de empresas -->
+        <tr>
+          <td>RUT Ejemplo</td>
+          <td>Nombre Empresa Ejemplo</td>
+          <td>correo@empresa.com</td>
+          <td>Encargado Ejemplo</td>
+          <td>RUT Encargado Ejemplo</td>
+          <td>Razón Social Ejemplo</td>
+          <td>Teléfono Ejemplo</td>
+          <td>
+            <span class="accion" onclick="modificarEmpresa()">Modificar</span>
+            <span class="accion" onclick="eliminarEmpresa()">Eliminar</span>
+          </td>
+        </tr>
+        <!-- Puedes agregar más filas según sea necesario -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function modificarEmpresa() {
+      // Aquí puedes agregar la lógica para modificar la empresa.
+      // Puede ser una redirección a otra página, un modal, etc.
+      alert("Implementa la lógica para modificar la empresa.");
+    }
+
+    function eliminarEmpresa() {
+      // Aquí puedes agregar la lógica para eliminar la empresa.
+      // Puede ser una confirmación y luego realizar la eliminación.
+      alert("Implementa la lógica para eliminar la empresa.");
+    }
+  </script>
+
+</body>
+</html>
+

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Usuarios</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start; /* Alinea la tabla más arriba */
+      min-height: 100vh;
+    }
+
+    #contenedor {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #1a4a6a;
+      color: #fff;
+    }
+
+    .accion {
+      cursor: pointer;
+      color: #3498db;
+      margin-right: 10px;
+    }
+    button {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <div id="contenedor">
+    <h2>Lista de Usuarios</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido Paterno</th>
+          <th>Apellido Materno</th>
+          <th>Correo electrónico</th>
+          <th>Tipo de Rol</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Aquí puedes agregar dinámicamente filas con datos de usuarios -->
+        <tr th:each="usuario : ${usuarios}">
+          <td th:text="${usuario.nombre}" th:id="${usuario.iduser}"></td>
+          <td th:text="${usuario.apellidoP}"></td>
+          <td th:text="${usuario.apellidoM}"></td>
+          <td th:text="${usuario.email}"></td>
+          <td th:switch="${usuario.idRol}">
+            <p th:case="1">Administrador</p>
+            <p th:case="2">Visador</p>
+            <p th:case="3">Evaluador</p>
+            <p th:case="4">Visualizador</p>
+          </td>
+          <td>
+            <span class="accion" onclick="modificarUsuario()">Modificar</span>
+            <span class="accion" th:onclick="'eliminarUsuario('+ ${usuario.iduser} +')'">Eliminar</span>
+          </td>
+        </tr>
+        <!-- Puedes agregar más filas según sea necesario -->
+      </tbody>
+    </table>
+    <button onclick="volverAtras()" style="position: relative; top:10px;">Volver</button>
+  </div>
+
+  <script>
+    function modificarUsuario() {
+      // Aquí puedes agregar la lógica para modificar el usuario.
+      // Puede ser una redirección a otra página, un modal, etc.
+      alert("Implementa la lógica para modificar el usuario.");
+    }
+
+    function eliminarUsuario(idUsuario) {
+            // Mostrar el cuadro de diálogo de confirmación
+            var nombrecito = document.getElementById(idUsuario).textContent;
+            var respuesta = confirm("¿Estás seguro de que deseas eliminar el usuario "+nombrecito+"?");
+
+            // Verificar la respuesta
+            if (respuesta) {
+                var urlDelet = '/usuario/'+idUsuario;
+                fetch(urlDelet,{method:'DELETE'})
+                alert("El usuario "+nombrecito+" se ha eliminado con éxito.");
+                location.reload();
+            }
+    }
+    function volverAtras() {
+      window.history.back();
+    }
+  </script>
+
+</body>
+</html>
+
+

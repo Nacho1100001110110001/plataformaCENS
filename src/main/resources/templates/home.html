@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu CENS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #contenedor {
+      text-align: center;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #logo {
+      max-width: 250px; /* ajusta el tamaño del logo según sea necesario */
+      margin-bottom: 20px; /* espacio entre el logo y la lista de grupos */
+    }
+
+    .grupo-lista {
+      list-style: none;
+      padding: 0;
+      text-align: center;
+    }
+
+    .grupo-lista li {
+      margin: 10px;
+    }
+
+    .grupo-enlace {
+      text-decoration: none;
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: #fff;
+      border-radius: 5px;
+      display: block;
+      transition: background-color 0.3s ease;
+    }
+
+    .grupo-enlace:hover {
+      background-color: #002d4b;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="contenedor">
+    <img id="logo" src="/logotipo-cens-removebg-preview.png" alt="Tu Logo"> 
+    <h2>Bienvenido / a </h2>
+    
+    <ul class="grupo-lista">
+      <li><a th:href="@{https://www.ejemplo1.com}" class="grupo-enlace">Perfil</a></li>
+      <li><a th:href="@{/ingusuario}" class="grupo-enlace">Ingresar Usuario</a></li>
+      <li><a th:href="@{ingresar_empresa.html}" class="grupo-enlace">Ingresar Empresa</a></li>
+      <li><a th:href="@{/usuario}" class="grupo-enlace">Ver usuario</a></li>
+      <li><a th:href="@{ver_empresa.html}" class="grupo-enlace">Ver empresa</a></li>
+    </ul>
+  </div>
+
+</body>
+</html>
+
+

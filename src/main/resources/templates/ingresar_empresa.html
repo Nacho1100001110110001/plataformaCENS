@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Creación de Empresa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #contenedor {
+      text-align: center;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .formulario {
+      text-align: left;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .campo-formulario {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .mensaje-error {
+      color: red;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="contenedor">
+    <h2>Formulario de Creación de Empresa</h2>
+
+    <div class="formulario">
+      <form action="ingresaEmpresa" method="post">
+        <div class="campo-formulario">
+          <label for="rutEmpresa">RUT Empresa:</label>
+          <input type="text" id="rutEmpresa" name="rutEmpresa" required>
+        </div>
+
+        <div class="campo-formulario">
+          <label for="nomEmp">Nombre Empresa:</label>
+          <input type="text" id="nomEmp" name="nomEmp" required>
+        </div>
+
+        <div class="campo-formulario">
+          <label for="emailEmp">Correo electrónico Empresa:</label>
+          <input type="email" id="emailEmp" name="emailEmp" required>
+        </div>
+
+        <div class="campo-formulario">
+          <label for="razonSocial">Razón Social:</label>
+          <input type="text" id="razonSocial" name="razonSocial" required>
+        </div>
+
+        <div class="campo-formulario">
+          <label for="contactoEmp">Teléfono Empresa:</label>
+          <input type="text" id="contactoEmp" name="contactoEmp" required>
+        </div>
+
+        <div class="campo-formulario">
+          <label for="encargadoEmp">Nombre Encargado:</label>
+          <input type="text" id="encargadoEmp" name="encargadoEmp" required>
+        </div>
+
+        <div class="campo-formulario">
+          <label for="encargadoRun_emp">RUT Encargado:</label>
+          <input type="text" id="encargadoRun_emp" name="encargadoRun_emp" required>
+        </div>
+
+        <button type="submit">Crear Empresa</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function validarFormulario() {
+      // Puedes agregar lógica de validación adicional si es necesario
+      return true;
+    }
+  </script>
+
+</body>
+</html>

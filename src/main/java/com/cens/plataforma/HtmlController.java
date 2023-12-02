@@ -13,7 +13,7 @@ public class HtmlController {
     
     @GetMapping
     public String home(){
-        System.out.println("hola:)");
+        System.out.println("hola");
         return "home";
     }
     

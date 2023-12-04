@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu CENS - Inicio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #banner {
+      background-color: #3498db;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+    }
+
+    #menu-bar {
+      display: flex;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #side-menu {
+      flex: 0 0 200px;
+      background-color: #3498db;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      margin-bottom: 10px;
+      color: #ffffff;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .menu-item:hover {
+      background-color: #002d4b;
+      color: #fff;
+    }
+
+    .separator {
+      width: 1px;
+      background-color: #3498db;
+      height: 100%;
+    }
+
+    #profile-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #ffffff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    #profile-button:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="banner">
+    <h2>Inicio</h2>
+  </div>
+
+  <div id="menu-bar">
+    <div id="side-menu">
+      <a th:href="@{/}" class="menu-item" style="width: 200px; height: 40px;">
+        🏠 Home
+      </a>
+      <a th:href="@{https://www.ejemplo1.com}" class="menu-item" style="width: 200px; height: 40px;">
+        🤵 Perfil
+      </a>
+      <a th:href="@{/ingusuario}" class="menu-item" style="width: 200px; height: 40px;">
+        🧑‍💼 Ingresar Usuario
+      </a>
+      <a th:href="@{ingresar_empresa.html}" class="menu-item" style="width: 200px; height: 40px;">
+        🏢 Ingresar Empresa
+      </a>
+      <a th:href="@{/usuario}" class="menu-item" style="width: 200px; height: 40px;">
+        👤 Ver Usuario
+      </a>
+      <a th:href="@{ver_empresa.html}" class="menu-item" style="width: 200px; height: 40px;">
+        🏢 Ver Empresa
+      </a>
+    </div>
+    <div class="separator"></div>
+    <a id="profile-button" th:href="@{/perfil}">
+      🤵 Perfil ▼
+    </a>
+  </div>
+
+  <!-- Contenido de la página va aquí -->
+
+</body>
+</html>

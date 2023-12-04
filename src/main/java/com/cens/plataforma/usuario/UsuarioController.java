@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cens.plataforma.rol.RolService;
@@ -30,7 +29,7 @@ public class UsuarioController {
 	public String UsuariosTomar(Model model){
         model.addAttribute("usuarios", usuarioService.getUsuarios());
         model.addAttribute("roles", rolService.getRoles());
-        return "ver_usuario";
+        return "usuario/ver_usuario";
 	}
     
     @PostMapping("/mod")
@@ -41,7 +40,7 @@ public class UsuarioController {
         }
         model.addAttribute("error", error);
         model.addAttribute("roles", rolService.getRolesB());
-        return "modificar_usuario";
+        return "usuario/modificar_usuario";
     }
 
     @PostMapping
@@ -50,14 +49,15 @@ public class UsuarioController {
         if(!usuarioService.addNewUsuario(usuario)){
             error = 1;
         }
+        model.addAttribute("roles", rolService.getRolesB());
         model.addAttribute("error", error);
-        return "ingresar_usuario";
+        return "usuario/ingresar_usuario";
     }
 
     @DeleteMapping(path = "{usuarioId}")
     public String eliminarUsuario(@PathVariable("usuarioId") Long usuarioId){
         usuarioService.eliminarUsuario(usuarioId);
-        return "ver_usuario";
+        return "usuario/ver_usuario";
     }
 
     

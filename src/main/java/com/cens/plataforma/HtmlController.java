@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cens.plataforma.rol.RolService;
@@ -30,15 +29,15 @@ public class HtmlController {
     
     @GetMapping("ingusuario")
     public String getUsuarios(Model model){
-        model.addAttribute("usuarioForma", new Usuario());
+        model.addAttribute("usuario", new Usuario());
         model.addAttribute("roles", rolService.getRolesB());
-        return "ingresar_usuario";
+        return "usuario/ingresar_usuario";
 	}
 
     @GetMapping(path = "modusuario/{usuarioId}")
     public String modificarUsuario(@PathVariable("usuarioId") Long usuarioId, Model model){
         model.addAttribute("usuario", usuarioService.getUsuarioById(usuarioId));
         model.addAttribute("roles", rolService.getRolesB());
-        return "modificar_usuario";
+        return "usuario/modificar_usuario";
     }
 }

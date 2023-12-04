@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,14 +68,14 @@
       </thead>
       <tbody>
         <!-- Aquí puedes agregar dinámicamente filas con datos de empresas -->
-        <tr>
-          <td>RUT Ejemplo</td>
-          <td>Nombre Empresa Ejemplo</td>
-          <td>correo@empresa.com</td>
-          <td>Encargado Ejemplo</td>
-          <td>RUT Encargado Ejemplo</td>
-          <td>Razón Social Ejemplo</td>
-          <td>Teléfono Ejemplo</td>
+        <tr th:each="empresa : ${empresas}">
+          <td th:text="${empresa.rutEmpresa}"></td>
+          <td th:text="${empresa.nombre}"></td>
+          <td th:text="${empresa.email}"></td>
+          <td th:text="${empresa.encargado}"></td>
+          <td th:text="${empresa.encargadoRun}"></td>
+          <td th:text="${empresa.razonSocial}"></td>
+          <td th:text="${empresa.contacto}"></td>
           <td>
             <span class="accion" onclick="modificarEmpresa()">Modificar</span>
             <span class="accion" onclick="eliminarEmpresa()">Eliminar</span>

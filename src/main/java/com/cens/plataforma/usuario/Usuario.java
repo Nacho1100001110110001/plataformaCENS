@@ -1,10 +1,16 @@
 package com.cens.plataforma.usuario;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.cens.plataforma.empresa.Empresa;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -29,35 +35,26 @@ public class Usuario {
     
     private Long iduser;
     
-    @Column(
-        name = "nomuser"
-    )
+    @Column(name = "nomuser")
     private String nombre;
     
-    @Column(
-        name = "apellP"
-    )
+    @Column(name = "apellP")
     private String apellidoP;
     
-    @Column(
-        name = "apellM"
-    )
+    @Column(name = "apellM")
     private String apellidoM;
     
-    @Column(
-        name = "emailuser"
-    )
+    @Column(name = "emailuser")
     private String email;
     
-    @Column(
-        name = "passuser"
-    )
+    @Column(name = "passuser")
     private String password;
     
-    @Column(
-        name = "id_Rol"
-    )
+    @Column(name = "id_Rol")
     private Long idRol;
+
+    @OneToMany(mappedBy = "usuario")
+    private Set<Empresa> empresas = new HashSet<>();
     
     public Usuario(Long id, String nombre, String apellidoP, String apellidoM, String email, String password,
             Long idRol) {

@@ -1,82 +1,66 @@
 package com.cens.plataforma.empresa;
 
+import com.cens.plataforma.usuario.Usuario;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
+@Entity(name = "empresa")
+@Table(name = "empresa")
 @Getter
-@Entity(name= "empresa")
-@Table(name= "empresa")
+@Setter
 public class Empresa {
+    
     @Id
-    @SequenceGenerator(
-        name= "secuencia_empresa",
-        sequenceName = "secuencia_empresa",
-        allocationSize = 1,
-        initialValue = 6
-    )
-    @GeneratedValue(
-        strategy = GenerationType.SEQUENCE,
-        generator = "secuencia_empresa"
-    )
-    
-    private Long rutEmpresa;
-    
-    @Column(
-        name = "nomEmp"
-    )  
-    private String nombre; 
-    @Column(
-        name = "id_User"
-    )
-    private int iduser;
+    @Column(name = "rutempresa")
+    private String rutEmpresa;
 
-    @Column(
-        name = "emailEmp"
-    )
+    @Column(name = "nomemp")
+    private String nombre;
+    
+    @Column(name = "emailemp")
     private String email;
 
-    @Column(
-        name = "EcargadoEmp"
-    )
+    @Column(name = "encargadoemp")
     private String encargado;
 
-    @Column(
-        name = "EncargadoRun_Emp"
-    )
-    private String runEcargado;
+    @Column(name = "encargadorun_emp")
+    private String encargadoRun;
 
-    @Column(
-        name = "RazonSocial"
-    )
+    @Column(name = "razonsocial")
     private String razonSocial;
 
-    @Column(
-        name = "ContactoEmp"
-    )
-    private String contactoEmp;
+    @Column(name = "contactoemp")
+    private String contacto;
 
-    public Empresa(Long rutEmpresa, int iduser, String email, String encargado, String runEncargado, 
-            String razonSocial, String contactoEmp){
-                
+    @ManyToOne
+    @JoinColumn(name = "iduser")
+    private Usuario usuario;
+
+    public Empresa() {
     }
 
-    public Empresa(int id_user, String emailEmp, String Encargado_Emp, String EncargadoRun_Emp, 
-            String RazonSocial, String ContactoEmp){
-                
+    public Empresa(String rutEmpresa, String nombre, String email, String encargado, String encargadoRun,
+            String razonSocial, String contacto) {
+        this.rutEmpresa = rutEmpresa;
+        this.nombre = nombre;
+        this.email = email;
+        this.encargado = encargado;
+        this.encargadoRun = encargadoRun;
+        this.razonSocial = razonSocial;
+        this.contacto = contacto;
     }
 
+    @Override
+    public String toString() {
+        return "Empresa [rutEmpresa=" + rutEmpresa + ", nombre=" + nombre + ", email=" + email
+                + ", encargado=" + encargado + ", encaargadoRun=" + encargadoRun + ", razonSocial=" + razonSocial
+                + ", contacto=" + contacto + "]";
+    }
 }

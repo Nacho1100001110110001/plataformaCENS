@@ -82,14 +82,9 @@
           <td th:text="${usuario.apellidoP}"></td>
           <td th:text="${usuario.apellidoM}"></td>
           <td th:text="${usuario.email}"></td>
-          <td th:switch="${usuario.idRol}">
-            <p th:case="1">Administrador</p>
-            <p th:case="2">Visador</p>
-            <p th:case="3">Evaluador</p>
-            <p th:case="4">Visualizador</p>
-          </td>
+          <td th:text="${roles[usuario.idRol-1].nomRol}"></td>
           <td>
-            <span class="accion" onclick="modificarUsuario()">Modificar</span>
+            <span class="accion" th:onclick="'modificarUsuario('+ ${usuario.iduser} +')'">Modificar</span>
             <span class="accion" th:onclick="'eliminarUsuario('+ ${usuario.iduser} +')'">Eliminar</span>
           </td>
         </tr>
@@ -100,10 +95,9 @@
   </div>
 
   <script>
-    function modificarUsuario() {
-      // Aquí puedes agregar la lógica para modificar el usuario.
-      // Puede ser una redirección a otra página, un modal, etc.
-      alert("Implementa la lógica para modificar el usuario.");
+    function modificarUsuario(idUsuario) {
+      var urlMod = '/modusuario/'+idUsuario;
+      window.location.href = urlMod;
     }
 
     function eliminarUsuario(idUsuario) {
@@ -114,13 +108,13 @@
             // Verificar la respuesta
             if (respuesta) {
                 var urlDelet = '/usuario/'+idUsuario;
-                fetch(urlDelet,{method:'DELETE'})
+                fetch(urlDelet,{method:'DELETE'});
                 alert("El usuario "+nombrecito+" se ha eliminado con éxito.");
                 location.reload();
             }
     }
     function volverAtras() {
-      window.history.back();
+      window.location.href = "/";
     }
   </script>
 

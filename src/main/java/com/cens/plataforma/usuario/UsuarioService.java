@@ -17,13 +17,30 @@ public class UsuarioService {
 	public List<Usuario> getUsuarios(){
 		return usuarioRepository.findAll();
 	}
+	public Usuario getUsuarioById(Long idUsuario){
+		Optional<Usuario> u = usuarioRepository.findById(idUsuario);
+		Usuario usuario;
+		if(u.isPresent()) usuario = u.get();
+		else return null;
+		return usuario;
+	}
 
-	public void addNewUsuario(Usuario usuario) {
+	public boolean addNewUsuario(Usuario usuario) {
 		Optional<Usuario> usuarioByEmail = usuarioRepository.findUsuarioByEmail(usuario.getEmail());
 		if(usuarioByEmail.isPresent()){
-			throw new IllegalStateException("Email ya ocupado");
+			return false;
 		}
 		usuarioRepository.save(usuario);
+		return true;
+	}
+
+	public boolean modificarUsuario(Usuario usuario) {
+		Optional<Usuario> usuarioByEmail = usuarioRepository.findUsuarioByEmail(usuario.getEmail());
+		if(usuarioByEmail.isPresent() && usuario.getIduser() != usuarioByEmail.get().getIduser()){
+			return false;
+		}
+		usuarioRepository.save(usuario);
+		return true;
 	}
 
     public void eliminarUsuario(Long usuarioId) {

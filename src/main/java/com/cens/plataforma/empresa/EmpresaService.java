@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.cens.plataforma.usuario.Usuario;
 
 @Service
 public class EmpresaService {

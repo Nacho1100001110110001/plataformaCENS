@@ -2,10 +2,12 @@ package com.cens.plataforma.empresa;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @RequestMapping("/empresa")
@@ -21,14 +23,27 @@ public class EmpresaController {
         model.addAttribute("empresas", empresaService.getEmpresas());
         return "empresa/ver_empresa";
     }
-
+    @PostMapping("/mod")
+    public String modificaEmpresa(@ModelAttribute Empresa empresa, Model model){;  
+        int error = 2;
+        if(!empresaService.modificarEmpresa(empresa)){
+            error = 1;
+        }
+        model.addAttribute("error", error);
+        return "empresa/modificar_empresa";
+    }
     @PostMapping
-    public String registroEmpresa(@ModelAttribute Empresa empresa, Model model){
+    public String registroEmpresa(@ModelAttribute Empresa empresa, Model model){;
         int error= 2;
         if(!empresaService.addNewEmpresa(empresa)){
             error=1;
         }
         model.addAttribute("error", error);
         return "empresa/ingresar_empresa";
+    }
+    @DeleteMapping(path = "{rutEmpresa}")
+    public String eliminarUsuario(@PathVariable("rutEmpresa") String rutEmpresa){
+        empresaService.eliminarEmpresa(rutEmpresa);
+        return "empresa/ver_empresa";
     }
 }

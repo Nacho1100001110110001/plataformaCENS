@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,56 +70,72 @@
 </head>
 <body>
 
-  <div id="contenedor">
+  <div id="contenedor" th:attr="errorcito=${error}">
     <h2>Formulario de Creación de Empresa</h2>
 
     <div class="formulario">
-      <form action="ingresaEmpresa" method="post">
+      <form th:action="empresa" th:method="post" th:object="${empresa}">
         <div class="campo-formulario">
           <label for="rutEmpresa">RUT Empresa:</label>
-          <input type="text" id="rutEmpresa" name="rutEmpresa" required>
+          <input type="text" id="rutEmpresa" name="rutEmpresa" th:value="${empresa.rutEmpresa}" required>
         </div>
 
         <div class="campo-formulario">
-          <label for="nomEmp">Nombre Empresa:</label>
-          <input type="text" id="nomEmp" name="nomEmp" required>
+          <label for="nombre">Nombre Empresa:</label>
+          <input type="text" id="nombre" name="nombre" th:value="${empresa.nombre}" required>
         </div>
 
         <div class="campo-formulario">
-          <label for="emailEmp">Correo electrónico Empresa:</label>
-          <input type="email" id="emailEmp" name="emailEmp" required>
+          <label for="email">Correo electrónico Empresa:</label>
+          <input type="text" id="email" name="email" th:value="${empresa.email}" required>
         </div>
 
         <div class="campo-formulario">
           <label for="razonSocial">Razón Social:</label>
-          <input type="text" id="razonSocial" name="razonSocial" required>
+          <input type="text" id="razonSocial" name="razonSocial" th:value="${empresa.razonSocial}" required>
         </div>
 
         <div class="campo-formulario">
-          <label for="contactoEmp">Teléfono Empresa:</label>
-          <input type="text" id="contactoEmp" name="contactoEmp" required>
+          <label for="contacto">Teléfono Empresa:</label>
+          <input type="text" id="contacto" name="contacto" th:value="${empresa.contacto}" required>
         </div>
 
         <div class="campo-formulario">
-          <label for="encargadoEmp">Nombre Encargado:</label>
-          <input type="text" id="encargadoEmp" name="encargadoEmp" required>
+          <label for="encargado">Nombre Encargado:</label>
+          <input type="text" id="encargado" name="encargado" th:value="${empresa.encargado}" required>
         </div>
 
         <div class="campo-formulario">
-          <label for="encargadoRun_emp">RUT Encargado:</label>
-          <input type="text" id="encargadoRun_emp" name="encargadoRun_emp" required>
+          <label for="encargadoRun">RUT Encargado:</label>
+          <input type="text" id="encargadoRun" name="encargadoRun" th:value="${empresa.encargadoRun}" required>
         </div>
-
         <button type="submit">Crear Empresa</button>
+        <button type="button" onclick="volverAtras()" >Volver</button>
       </form>
     </div>
   </div>
 
   <script>
     function validarFormulario() {
-      // Puedes agregar lógica de validación adicional si es necesario
-      return true;
+
     }
+    function volverAtras() {
+      window.location.href = "/";
+    }
+    function errorcito(){
+      var valorError= document.getElementById('contenedor').getAttribute('errorcito');
+      if(valorError == 1){
+        alert('Email ya ocupado.');
+      }
+      if(valorError == 2){
+        alert('Empresa agregada con exito.');
+        window.location.href = "/";
+      }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      // Llamar a la función una vez que el DOM esté listo
+      errorcito();
+    });
   </script>
 
 </body>

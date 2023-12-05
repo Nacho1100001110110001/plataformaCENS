@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.cens.plataforma.empresa.Empresa;
 import com.cens.plataforma.rol.RolService;
 import com.cens.plataforma.usuario.Usuario;
 import com.cens.plataforma.usuario.UsuarioService;
@@ -34,6 +35,11 @@ public class HtmlController {
         return "usuario/ingresar_usuario";
 	}
 
+    @GetMapping("ingempresa")
+    public String ingEmpresa(Model model){
+        model.addAttribute("empresa", new Empresa());
+        return "empresa/ingresar_empresa";
+    }
     @GetMapping(path = "modusuario/{usuarioId}")
     public String modificarUsuario(@PathVariable("usuarioId") Long usuarioId, Model model){
         model.addAttribute("usuario", usuarioService.getUsuarioById(usuarioId));

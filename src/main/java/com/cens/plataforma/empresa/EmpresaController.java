@@ -33,6 +33,7 @@ public class EmpresaController {
         return "empresa/modificar_empresa";
     }
     @PostMapping
+    @GetMapping
     public String registroEmpresa(@ModelAttribute Empresa empresa, Model model){;
         int error= 2;
         if(!empresaService.addNewEmpresa(empresa)){

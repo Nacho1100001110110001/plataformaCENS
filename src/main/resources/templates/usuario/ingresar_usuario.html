@@ -109,8 +109,8 @@
 
         <div class="campo-formulario">
           <label for="rol">Tipo de Rol:</label>
-          <select id="idRol" name="idRol" required>
-            <option th:each="rol : ${roles}" th:value="${rol.idRol}" th:selected="${rol.idRol == usuario.idRol}" th:text="${rol.nomRol}"></option>
+          <select id="rol" name="rol" required>
+            <option th:each="rol : ${roles}" th:value="${rol.idRol}" th:selected="${rol == usuario.rol}" th:text="${rol.nomRol}"></option>
           </select>
         </div>
         <button type="submit">Crear Usuario</button>

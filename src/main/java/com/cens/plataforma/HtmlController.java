@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cens.plataforma.empresa.Empresa;
+import com.cens.plataforma.empresa.EmpresaService;
 import com.cens.plataforma.rol.RolService;
 import com.cens.plataforma.usuario.Usuario;
 import com.cens.plataforma.usuario.UsuarioService;
@@ -16,34 +17,42 @@ import com.cens.plataforma.usuario.UsuarioService;
 public class HtmlController {
     private final RolService rolService;
     private final UsuarioService usuarioService;
+    private final EmpresaService empresaService;
     
-    public HtmlController(RolService rolService, UsuarioService usuarioService) {
+    public HtmlController(RolService rolService, UsuarioService usuarioService, EmpresaService empresaService) {
         this.rolService = rolService;
         this.usuarioService = usuarioService;
+        this.empresaService = empresaService;
     }
 
     @GetMapping
     public String home(){
-        System.out.println("hola");
         return "home";
     }
     
-    @GetMapping("ingusuario")
+    @GetMapping("ingresar-usuario")
     public String getUsuarios(Model model){
         model.addAttribute("usuario", new Usuario());
-        model.addAttribute("roles", rolService.getRolesB());
+        model.addAttribute("roles", rolService.getRolesNoAdmin());
         return "usuario/ingresar_usuario";
 	}
 
-    @GetMapping("ingempresa")
+    @GetMapping("ingresar-empresa")
     public String ingEmpresa(Model model){
         model.addAttribute("empresa", new Empresa());
         return "empresa/ingresar_empresa";
     }
-    @GetMapping(path = "modusuario/{usuarioId}")
+
+    @GetMapping(path = "modificar-usuario/{usuarioId}")
     public String modificarUsuario(@PathVariable("usuarioId") Long usuarioId, Model model){
         model.addAttribute("usuario", usuarioService.getUsuarioById(usuarioId));
-        model.addAttribute("roles", rolService.getRolesB());
+        model.addAttribute("roles", rolService.getRolesNoAdmin());
         return "usuario/modificar_usuario";
+    }
+
+    @GetMapping(path = "modificar-empresa/{empresaId}")
+    public String modificarEmpresa(@PathVariable("empresaId") Long empresaId, Model model){
+        model.addAttribute("empresa", empresaService.getEmpresaById(empresaId));
+        return "empresa/modificar_empresa";
     }
 }

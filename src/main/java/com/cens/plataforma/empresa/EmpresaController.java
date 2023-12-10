@@ -41,9 +41,9 @@ public class EmpresaController {
         model.addAttribute("error", error);
         return "empresa/ingresar_empresa";
     }
-    @DeleteMapping(path = "{rutEmpresa}")
-    public String eliminarUsuario(@PathVariable("rutEmpresa") String rutEmpresa){
-        empresaService.eliminarEmpresa(rutEmpresa);
+    @DeleteMapping(path = "{idEmpresa}")
+    public String eliminarUsuario(@PathVariable("idEmpresa") Long idEmpresa){
+        empresaService.eliminarEmpresa(idEmpresa);
         return "empresa/ver_empresa";
     }
 }

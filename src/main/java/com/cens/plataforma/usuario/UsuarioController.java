@@ -27,7 +27,7 @@ public class UsuarioController {
 
     @GetMapping
 	public String UsuariosTomar(Model model){
-        model.addAttribute("usuarios", usuarioService.getUsuarios());
+        model.addAttribute("usuarios", usuarioService.getUsuariosNoAdmin());
         model.addAttribute("roles", rolService.getRoles());
         return "usuario/ver_usuario";
 	}
@@ -39,7 +39,7 @@ public class UsuarioController {
             error = 1;
         }
         model.addAttribute("error", error);
-        model.addAttribute("roles", rolService.getRolesB());
+        model.addAttribute("roles", rolService.getRolesNoAdmin());
         return "usuario/modificar_usuario";
     }
 
@@ -49,7 +49,7 @@ public class UsuarioController {
         if(!usuarioService.addNewUsuario(usuario)){
             error = 1;
         }
-        model.addAttribute("roles", rolService.getRolesB());
+        model.addAttribute("roles", rolService.getRolesNoAdmin());
         model.addAttribute("error", error);
         return "usuario/ingresar_usuario";
     }

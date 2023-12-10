@@ -1,47 +1,77 @@
 package com.cens.plataforma.empresa;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.cens.plataforma.etapa.Etapa;
+import com.cens.plataforma.logica_proceso.nota_proceso.NotaProceso;
 import com.cens.plataforma.usuario.Usuario;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @Entity(name = "empresa")
 @Table(name = "empresa")
-@Getter
-@Setter
+@Data
 public class Empresa {
     
     @Id
-    @Column(name = "rutempresa")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_empresa")
+    private Long idEmpresa;
+    
+    @Column(name = "rut_empresa")
     private String rutEmpresa;
 
-    @Column(name = "nomemp")
+    @Column(name = "nom_emp")
     private String nombre;
     
-    @Column(name = "emailemp")
+    @Column(name = "email_emp")
     private String email;
 
-    @Column(name = "encargadoemp")
+    @Column(name = "encargado_emp")
     private String encargado;
 
-    @Column(name = "encargadorun_emp")
+    @Column(name = "encargado_run_emp")
     private String encargadoRun;
 
-    @Column(name = "razonsocial")
+    @Column(name = "razon_social")
     private String razonSocial;
 
-    @Column(name = "contactoemp")
+    @Column(name = "contacto_emp")
     private String contacto;
 
     @ManyToOne
-    @JoinColumn(name = "iduser")
+    @JoinColumn(name = "id_user", nullable = true)
     private Usuario usuario;
+
+    @OneToMany(mappedBy = "empresa")
+    private Set<NotaProceso> notaProceso = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "id_etapa")
+    private Etapa etapa;
+
+    public Empresa(Long idEmpresa, String rutEmpresa, String nombre, String email, String encargado,
+            String encargadoRun, String razonSocial, String contacto, Usuario usuario) {
+        this.idEmpresa = idEmpresa;
+        this.rutEmpresa = rutEmpresa;
+        this.nombre = nombre;
+        this.email = email;
+        this.encargado = encargado;
+        this.encargadoRun = encargadoRun;
+        this.razonSocial = razonSocial;
+        this.contacto = contacto;
+        this.usuario = usuario;
+    }
 
     public Empresa() {
     }
@@ -55,12 +85,5 @@ public class Empresa {
         this.encargadoRun = encargadoRun;
         this.razonSocial = razonSocial;
         this.contacto = contacto;
-    }
-
-    @Override
-    public String toString() {
-        return "Empresa [rutEmpresa=" + rutEmpresa + ", nombre=" + nombre + ", email=" + email
-                + ", encargado=" + encargado + ", encaargadoRun=" + encargadoRun + ", razonSocial=" + razonSocial
-                + ", contacto=" + contacto + "]";
     }
 }

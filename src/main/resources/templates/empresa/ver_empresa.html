@@ -82,15 +82,15 @@
         <!-- Aquí puedes agregar dinámicamente filas con datos de empresas -->
         <tr th:each="empresa : ${empresas}">
           <td th:text="${empresa.rutEmpresa}"></td>
-          <td th:text="${empresa.nombre}"></td>
+          <td th:text="${empresa.nombre}" th:id="${empresa.idEmpresa}"></td>
           <td th:text="${empresa.email}"></td>
           <td th:text="${empresa.encargado}"></td>
           <td th:text="${empresa.encargadoRun}"></td>
           <td th:text="${empresa.razonSocial}"></td>
           <td th:text="${empresa.contacto}"></td>
           <td>
-            <span class="accion" onclick="modificarEmpresa()">Modificar</span>
-            <span class="accion" onclick="eliminarEmpresa()">Eliminar</span>
+            <span class="accion" th:onclick="'modificarEmpresa('+ ${empresa.idEmpresa} +')'">Modificar</span>
+            <span class="accion" th:onclick="'eliminarEmpresa('+ ${empresa.idEmpresa} +')'">Eliminar</span>
           </td>
         </tr>
         <!-- Puedes agregar más filas según sea necesario -->
@@ -100,16 +100,23 @@
   </div>
 
   <script>
-    function modificarEmpresa() {
-      // Aquí puedes agregar la lógica para modificar la empresa.
-      // Puede ser una redirección a otra página, un modal, etc.
-      alert("Implementa la lógica para modificar la empresa.");
+    function modificarEmpresa(idEmpresa) {
+      var urlMod = 'modificar-empresa/' + idEmpresa;
+      window.location.href = urlMod;
     }
 
-    function eliminarEmpresa() {
-      // Aquí puedes agregar la lógica para eliminar la empresa.
-      // Puede ser una confirmación y luego realizar la eliminación.
-      alert("Implementa la lógica para eliminar la empresa.");
+    function eliminarEmpresa(idEmpresa) {
+      // Mostrar el cuadro de diálogo de confirmación
+      var nombrecito = document.getElementById(idEmpresa).textContent;
+            var respuesta = confirm("¿Estás seguro de que deseas eliminar la empresa "+nombrecito+"?");
+
+            // Verificar la respuesta
+            if (respuesta) {
+                var urlDelet = '/empresa/'+idEmpresa;
+                fetch(urlDelet,{method:'DELETE'});
+                alert("La empresa "+nombrecito+" se ha eliminado con éxito.");
+                location.reload();
+            }
     }
     function volverAtras() {
       window.location.href = "/";

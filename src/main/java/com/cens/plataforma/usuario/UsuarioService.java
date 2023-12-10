@@ -17,6 +17,12 @@ public class UsuarioService {
 	public List<Usuario> getUsuarios(){
 		return usuarioRepository.findAll();
 	}
+
+	public List<Usuario> getUsuariosNoAdmin(){
+		List<Usuario> usuarios = usuarioRepository.findAll();
+		usuarios.remove(0);
+		return usuarios;
+	}
 	public Usuario getUsuarioById(Long idUsuario){
 		Optional<Usuario> u = usuarioRepository.findById(idUsuario);
 		Usuario usuario;
@@ -36,7 +42,7 @@ public class UsuarioService {
 
 	public boolean modificarUsuario(Usuario usuario) {
 		Optional<Usuario> usuarioByEmail = usuarioRepository.findUsuarioByEmail(usuario.getEmail());
-		if(usuarioByEmail.isPresent() && usuario.getIduser() != usuarioByEmail.get().getIduser()){
+		if(usuarioByEmail.isPresent() && usuario.getIdUser() != usuarioByEmail.get().getIdUser()){
 			return false;
 		}
 		usuarioRepository.save(usuario);

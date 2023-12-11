@@ -1,6 +1,8 @@
 package com.cens.plataforma.usuario;
 
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cens.plataforma.rol.RolService;
@@ -44,6 +47,14 @@ public class UsuarioController {
     }
 
     @PostMapping
+    // public ResponseEntity<String> registroUsuario(@RequestBody Usuario usuario, Model model){;  
+    //     System.out.println("Usuario chistoso: " + usuario);
+    //     if(!usuarioService.addNewUsuario(usuario)){
+    //         return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body("Email ya ocupado lol.");
+    //     }else{
+    //         return ResponseEntity.ok("Usuario agregado con exito lol.");
+    //     }
+    // }
     public String registroUsuario(@ModelAttribute Usuario usuario, Model model){;  
         int error = 2;
         if(!usuarioService.addNewUsuario(usuario)){

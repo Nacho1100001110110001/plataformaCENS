@@ -26,6 +26,6 @@ public class TipoProceso {
     @Column(name = "nom_tipo_proceso")
     private String nombre;
 
-    @OneToMany(mappedBy = "tipo_proceso")
+    @OneToMany(mappedBy = "tipoProceso")
     private Set<Proceso> procesos = new HashSet<>();
 }

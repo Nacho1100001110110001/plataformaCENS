@@ -18,6 +18,10 @@ public class UsuarioService {
 		return usuarioRepository.findAll();
 	}
 
+	public Optional<Usuario> getUsuarioByEmail(String email){
+		return usuarioRepository.findUsuarioByEmail(email);
+	}
+
 	public List<Usuario> getUsuariosNoAdmin(){
 		List<Usuario> usuarios = usuarioRepository.findAll();
 		usuarios.remove(0);

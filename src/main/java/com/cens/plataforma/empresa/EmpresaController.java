@@ -21,7 +21,7 @@ public class EmpresaController {
     @GetMapping
     public String empresaTomar(Model model){
         model.addAttribute("empresas", empresaService.getEmpresas());
-        return "empresa/ver_empresa";
+        return "admin/empresa/ver_empresa";
     }
     @PostMapping("/mod")
     public String modificaEmpresa(@ModelAttribute Empresa empresa, Model model){;  
@@ -30,7 +30,7 @@ public class EmpresaController {
             error = 1;
         }
         model.addAttribute("error", error);
-        return "empresa/modificar_empresa";
+        return "admin/empresa/modificar_empresa";
     }
     @PostMapping
     public String registroEmpresa(@ModelAttribute Empresa empresa, Model model){;
@@ -39,11 +39,11 @@ public class EmpresaController {
             error=1;
         }
         model.addAttribute("error", error);
-        return "empresa/ingresar_empresa";
+        return "admin/empresa/ingresar_empresa";
     }
     @DeleteMapping(path = "{idEmpresa}")
     public String eliminarUsuario(@PathVariable("idEmpresa") Long idEmpresa){
         empresaService.eliminarEmpresa(idEmpresa);
-        return "empresa/ver_empresa";
+        return "admin/empresa/ver_empresa";
     }
 }

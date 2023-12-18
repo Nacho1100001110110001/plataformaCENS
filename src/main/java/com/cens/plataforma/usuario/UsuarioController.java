@@ -32,7 +32,7 @@ public class UsuarioController {
 	public String UsuariosTomar(Model model){
         model.addAttribute("usuarios", usuarioService.getUsuariosNoAdmin());
         model.addAttribute("roles", rolService.getRoles());
-        return "usuario/ver_usuario";
+        return "admin/usuario/ver_usuario";
 	}
     
     @PostMapping("/mod")
@@ -43,7 +43,7 @@ public class UsuarioController {
         }
         model.addAttribute("error", error);
         model.addAttribute("roles", rolService.getRolesNoAdmin());
-        return "usuario/modificar_usuario";
+        return "admin/usuario/modificar_usuario";
     }
 
     @PostMapping
@@ -62,13 +62,13 @@ public class UsuarioController {
         }
         model.addAttribute("roles", rolService.getRolesNoAdmin());
         model.addAttribute("error", error);
-        return "usuario/ingresar_usuario";
+        return "admin/usuario/ingresar_usuario";
     }
 
     @DeleteMapping(path = "{usuarioId}")
     public String eliminarUsuario(@PathVariable("usuarioId") Long usuarioId){
         usuarioService.eliminarUsuario(usuarioId);
-        return "usuario/ver_usuario";
+        return "admin/usuario/ver_usuario";
     }
 
     

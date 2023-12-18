@@ -34,25 +34,25 @@ public class HtmlController {
     public String getUsuarios(Model model){
         model.addAttribute("usuario", new Usuario());
         model.addAttribute("roles", rolService.getRolesNoAdmin());
-        return "usuario/ingresar_usuario";
+        return "admin/usuario/ingresar_usuario";
 	}
 
     @GetMapping("ingresar-empresa")
     public String ingEmpresa(Model model){
         model.addAttribute("empresa", new Empresa());
-        return "empresa/ingresar_empresa";
+        return "admin/empresa/ingresar_empresa";
     }
 
     @GetMapping(path = "modificar-usuario/{usuarioId}")
     public String modificarUsuario(@PathVariable("usuarioId") Long usuarioId, Model model){
         model.addAttribute("usuario", usuarioService.getUsuarioById(usuarioId));
         model.addAttribute("roles", rolService.getRolesNoAdmin());
-        return "usuario/modificar_usuario";
+        return "admin/usuario/modificar_usuario";
     }
 
     @GetMapping(path = "modificar-empresa/{empresaId}")
     public String modificarEmpresa(@PathVariable("empresaId") Long empresaId, Model model){
         model.addAttribute("empresa", empresaService.getEmpresaById(empresaId));
-        return "empresa/modificar_empresa";
+        return "admin/empresa/modificar_empresa";
     }
 }

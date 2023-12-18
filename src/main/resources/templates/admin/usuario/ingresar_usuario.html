@@ -71,47 +71,67 @@
 <body>
 
   <div id="contenedor" th:attr="errorcito=${error}">
-    <h2>Formulario de Modificación de Usuario</h2>
+    <h2>Formulario de Creación de Usuario</h2>
 
     <div class="formulario">
-      <form th:action="@{/usuario/mod}" th:method="POST" th:object="${usuario}">
+      <form th:action="usuario" th:method="post" th:object="${usuario}" onsubmit="return validarFormulario()">
         <div class="campo-formulario">
           <label for="nombre">Nombre:</label>
-          <input type="hidden" id="iduser" th:value="${usuario.iduser}" name="iduser" required>
-          <input type="hidden" id="password" th:value="${usuario.password}" name="password" required>
-          <input type="text" id="nombre" th:value="${usuario.nombre}" name="nombre" required>
+          <input type="text" id="nombre" name="nombre" th:value="${usuario.nombre}" required>
         </div>
 
         <div class="campo-formulario">
           <label for="apellidoPaterno">Apellido Paterno:</label>
-          <input type="text" id="apellidoP" th:value="${usuario.apellidoP}" name="apellidoP" required>
+          <input type="text" id="apellidoP" name="apellidoP" th:value="${usuario.apellidoP}" required>
         </div>
 
         <div class="campo-formulario">
           <label for="apellidoMaterno">Apellido Materno:</label>
-          <input type="text" id="apellidoM" th:value="${usuario.apellidoM}" name="apellidoM" required>
+          <input type="text" id="apellidoM" name="apellidoM" th:value="${usuario.apellidoM}" required>
         </div>
 
 
         <div class="campo-formulario">
           <label for="email">Correo electrónico:</label>
-          <input type="email" id="email" th:value="${usuario.email}" name="email" required>
+          <input type="email" id="email" name="email" th:value="${usuario.email}" required>
+        </div>
+
+        <div class="campo-formulario">
+          <label for="password">Contraseña:</label>
+          <input type="password" id="password" name="password" th:value="${usuario.password}" required>
+        </div>
+
+        <div class="campo-formulario">
+          <label for="confirmarPassword">Confirmar Contraseña:</label>
+          <input type="password" id="confirmarPassword" name="confirmarPassword" th:value="${usuario.password}" required>
+          <p class="mensaje-error" id="mensajeErrorPassword"></p>
         </div>
 
         <div class="campo-formulario">
           <label for="rol">Tipo de Rol:</label>
-          <select id="idRol" name="idRol" required>
-            <option th:each="rol : ${roles}" th:value="${rol.idRol}" th:selected="${rol.idRol == usuario.idRol}" th:text="${rol.nomRol}"></option>
+          <select id="rol" name="rol" required>
+            <option th:each="rol : ${roles}" th:value="${rol.idRol}" th:selected="${rol == usuario.rol}" th:text="${rol.nomRol}"></option>
           </select>
         </div>
-        <button type="submit">Modificar Usuario</button>
+        <button type="submit">Crear Usuario</button>
         <button type="button" onclick="volverAtras()" >Volver</button>
       </form>
     </div>
   </div>
 
   <script>
-    
+    function validarFormulario() {
+      var password = document.getElementById("password").value;
+      var confirmarPassword = document.getElementById("confirmarPassword").value;
+      var mensajeErrorPassword = document.getElementById("mensajeErrorPassword");
+
+      if (password !== confirmarPassword) {
+        mensajeErrorPassword.textContent = "Las contraseñas no coinciden";
+        return false;
+      }
+      mensajeErrorPassword.textContent = "";
+      return true;
+    }
     function volverAtras() {
       window.location.href = "/";
     }
@@ -121,7 +141,7 @@
         alert('Email ya ocupado.');
       }
       if(valorError == 2){
-        alert('Usuario modificado con exito.');
+        alert('Usuario agregado con exito.');
         window.location.href = "/";
       }
     }

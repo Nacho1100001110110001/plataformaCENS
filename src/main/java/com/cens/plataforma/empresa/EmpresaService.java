@@ -18,8 +18,8 @@ public class EmpresaService {
         return empresaRepository.findAll();
     }
 
-    public Empresa getEmpresaByRut(String rutEmpresa){
- 		Optional<Empresa> e = empresaRepository.findById(rutEmpresa);
+    public Empresa getEmpresaById(Long idEmpresa){
+ 		Optional<Empresa> e = empresaRepository.findById(idEmpresa);
 		Empresa empresa;
 		if(e.isPresent()) empresa = e.get();
 		else return null;
@@ -27,8 +27,8 @@ public class EmpresaService {
     }
 
     public boolean addNewEmpresa(Empresa empresa){
-		Optional<Empresa> empresaByEmail = empresaRepository.findEmpresaByEmail(empresa.getEmail());
-		if(empresaByEmail.isPresent()){
+		Optional<Empresa> empresaByRut = empresaRepository.findEmpresaByRutEmpresa(empresa.getRutEmpresa());
+		if(empresaByRut.isPresent()){
 			return false;
 		}
 		empresaRepository.save(empresa);
@@ -36,18 +36,20 @@ public class EmpresaService {
     }
 
     public boolean modificarEmpresa(Empresa empresa){
-		Optional<Empresa> empresaByEmail = empresaRepository.findEmpresaByEmail(empresa.getEmail());
-		if(empresaByEmail.isPresent() && empresa.getRutEmpresa() != empresaByEmail.get().getRutEmpresa()){
+		Optional<Empresa> empresaByRut = empresaRepository.findEmpresaByRutEmpresa(empresa.getRutEmpresa());
+		if(empresaByRut.isPresent() && empresa.getIdEmpresa() != empresaByRut.get().getIdEmpresa()){
+			System.out.println("Empresa encontrada: " + empresaByRut+ "\nEmpresa 1 id: "+ empresa.getIdEmpresa() + " Empresa 2 id: "+ empresaByRut.get().getIdEmpresa());
 			return false;
 		}
 		empresaRepository.save(empresa);
 		return true;
     }
-    public void eliminarEmpresa(String rutEmpresa){
-		boolean existe = empresaRepository.existsById(rutEmpresa);
+
+    public void eliminarEmpresa(Long idEmpresa){
+		boolean existe = empresaRepository.existsById(idEmpresa);
 		if(!existe){
-			throw new IllegalStateException("Empresa con la ID: " + rutEmpresa + " no existe.");
+			throw new IllegalStateException("Empresa con la ID: " + idEmpresa + " no existe.");
 		}
-		empresaRepository.deleteById(rutEmpresa);
+		empresaRepository.deleteById(idEmpresa);
     }
 }

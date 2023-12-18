@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Creación de Empresa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #contenedor {
+      text-align: center;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .formulario {
+      text-align: left;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .campo-formulario {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .mensaje-error {
+      color: red;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="contenedor" th:attr="errorcito=${error}">
+    <h2>Formulario de Modificación de Empresa</h2>
+
+    <div class="formulario">
+      <form th:action="@{/empresa/mod}" th:method="post" th:object="${empresa}">
+        <div class="campo-formulario">
+          <label for="rutEmpresa">RUT Empresa:</label>
+          <input type="hidden" id="idEmpresa" th:value="${empresa.idEmpresa}" name="idEmpresa" required>
+          <input type="text" id="rutEmpresa" name="rutEmpresa" th:value="${empresa.rutEmpresa}" required>
+        </div>
+
+        <div class="campo-formulario">
+          <label for="nombre">Nombre Empresa:</label>
+          <input type="text" id="nombre" name="nombre" th:value="${empresa.nombre}" required>
+        </div>
+
+        <div class="campo-formulario">
+          <label for="email">Correo electrónico Empresa:</label>
+          <input type="text" id="email" name="email" th:value="${empresa.email}" required>
+        </div>
+
+        <div class="campo-formulario">
+          <label for="razonSocial">Razón Social:</label>
+          <input type="text" id="razonSocial" name="razonSocial" th:value="${empresa.razonSocial}" required>
+        </div>
+
+        <div class="campo-formulario">
+          <label for="contacto">Teléfono Empresa:</label>
+          <input type="text" id="contacto" name="contacto" th:value="${empresa.contacto}" required>
+        </div>
+
+        <div class="campo-formulario">
+          <label for="encargado">Nombre Encargado:</label>
+          <input type="text" id="encargado" name="encargado" th:value="${empresa.encargado}" required>
+        </div>
+
+        <div class="campo-formulario">
+          <label for="encargadoRun">RUT Encargado:</label>
+          <input type="text" id="encargadoRun" name="encargadoRun" th:value="${empresa.encargadoRun}" required>
+        </div>
+        <button type="submit">Modificar Empresa</button>
+        <button type="button" onclick="volverAtras()" >Volver</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function validarFormulario() {
+
+    }
+    function volverAtras() {
+      window.location.href = "/empresa";
+    }
+    function errorcito(){
+      var valorError= document.getElementById('contenedor').getAttribute('errorcito');
+      if(valorError == 1){
+        alert('Rut ya ocupado por otra empresa.');
+      }
+      if(valorError == 2){
+        alert('Empresa modificada con exito.');
+        window.location.href = "/";
+      }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      // Llamar a la función una vez que el DOM esté listo
+      errorcito();
+    });
+  </script>
+
+</body>
+</html>

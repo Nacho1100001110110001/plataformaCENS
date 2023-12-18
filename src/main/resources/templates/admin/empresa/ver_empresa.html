@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Usuarios</title>
+  <title>Lista de Empresas</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -61,55 +61,60 @@
   </style>
 </head>
 <body>
+
   <div id="contenedor">
-    <h2>Lista de Usuarios</h2>
+    <h2>Lista de Empresas</h2>
 
     <table>
       <thead>
         <tr>
+          <th>RUT Empresa</th>
           <th>Nombre</th>
-          <th>Apellido Paterno</th>
-          <th>Apellido Materno</th>
-          <th>Correo electrónico</th>
-          <th>Tipo de Rol</th>
+          <th>Email</th>
+          <th>Nombre Encargado</th>
+          <th>RUT Encargado</th>
+          <th>Razón Social</th>
+          <th>Teléfono Empresa</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <!-- Aquí puedes agregar dinámicamente filas con datos de usuarios -->
-        <tr th:each="usuario : ${usuarios}">
-          <td th:text="${usuario.nombre}" th:id="${usuario.iduser}"></td>
-          <td th:text="${usuario.apellidoP}"></td>
-          <td th:text="${usuario.apellidoM}"></td>
-          <td th:text="${usuario.email}"></td>
-          <td th:text="${roles[usuario.idRol-1].nomRol}"></td>
+        <!-- Aquí puedes agregar dinámicamente filas con datos de empresas -->
+        <tr th:each="empresa : ${empresas}">
+          <td th:text="${empresa.rutEmpresa}"></td>
+          <td th:text="${empresa.nombre}" th:id="${empresa.idEmpresa}"></td>
+          <td th:text="${empresa.email}"></td>
+          <td th:text="${empresa.encargado}"></td>
+          <td th:text="${empresa.encargadoRun}"></td>
+          <td th:text="${empresa.razonSocial}"></td>
+          <td th:text="${empresa.contacto}"></td>
           <td>
-            <span class="accion" th:onclick="'modificarUsuario('+ ${usuario.iduser} +')'">Modificar</span>
-            <span class="accion" th:onclick="'eliminarUsuario('+ ${usuario.iduser} +')'">Eliminar</span>
+            <span class="accion" th:onclick="'modificarEmpresa('+ ${empresa.idEmpresa} +')'">Modificar</span>
+            <span class="accion" th:onclick="'eliminarEmpresa('+ ${empresa.idEmpresa} +')'">Eliminar</span>
           </td>
         </tr>
         <!-- Puedes agregar más filas según sea necesario -->
       </tbody>
     </table>
-    <button onclick="volverAtras()" style="position: relative; top:10px;">Volver</button>
+    <button type="button" onclick="volverAtras()" >Volver</button>
   </div>
 
   <script>
-    function modificarUsuario(idUsuario) {
-      var urlMod = '/modusuario/'+idUsuario;
+    function modificarEmpresa(idEmpresa) {
+      var urlMod = 'modificar-empresa/' + idEmpresa;
       window.location.href = urlMod;
     }
 
-    function eliminarUsuario(idUsuario) {
-            // Mostrar el cuadro de diálogo de confirmación
-            var nombrecito = document.getElementById(idUsuario).textContent;
-            var respuesta = confirm("¿Estás seguro de que deseas eliminar el usuario "+nombrecito+"?");
+    function eliminarEmpresa(idEmpresa) {
+      // Mostrar el cuadro de diálogo de confirmación
+      var nombrecito = document.getElementById(idEmpresa).textContent;
+            var respuesta = confirm("¿Estás seguro de que deseas eliminar la empresa "+nombrecito+"?");
 
             // Verificar la respuesta
             if (respuesta) {
-                var urlDelet = '/usuario/'+idUsuario;
+                var urlDelet = '/empresa/'+idEmpresa;
                 fetch(urlDelet,{method:'DELETE'});
-                alert("El usuario "+nombrecito+" se ha eliminado con éxito.");
+                alert("La empresa "+nombrecito+" se ha eliminado con éxito.");
                 location.reload();
             }
     }
@@ -120,5 +125,4 @@
 
 </body>
 </html>
-
 

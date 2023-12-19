@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.cens.plataforma.logica_proceso.proceso.Proceso;
+import com.cens.plataforma.logica_proceso.proceso_usuario_empresa.ProcesoUsuarioEmpresa;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,4 +29,7 @@ public class TipoProceso {
 
     @OneToMany(mappedBy = "tipoProceso")
     private Set<Proceso> procesos = new HashSet<>();
+    
+    @OneToMany(mappedBy = "tipoProceso")
+    private Set<ProcesoUsuarioEmpresa> pUE = new HashSet<>();
 }

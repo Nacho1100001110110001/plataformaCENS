@@ -16,6 +16,10 @@ public class RolService {
         return rolRepository.findAll();
     }
 
+    public Rol getRolById(Long idRol){
+        return rolRepository.findById(idRol).get();
+    }
+
     public List<Rol> getRolesNoAdmin(){
         List<Rol> roles = rolRepository.findAll();
         roles.remove(0);

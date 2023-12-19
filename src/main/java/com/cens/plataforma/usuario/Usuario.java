@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.cens.plataforma.empresa.Empresa;
+import com.cens.plataforma.logica_proceso.proceso_usuario_empresa.ProcesoUsuarioEmpresa;
 import com.cens.plataforma.rol.Rol;
 
 import jakarta.persistence.Column;
@@ -46,7 +47,7 @@ public class Usuario {
     private Rol rol;
 
     @OneToMany(mappedBy = "usuario")
-    private Set<Empresa> empresas = new HashSet<>();
+    private Set<ProcesoUsuarioEmpresa> pUE = new HashSet<>();
     
     public Usuario(Long id, String nombre, String apellidoP, String apellidoM, String email, String password,
             Rol rol) {

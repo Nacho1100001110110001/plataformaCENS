@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.cens.plataforma.etapa.Etapa;
 import com.cens.plataforma.logica_proceso.nota_proceso.NotaProceso;
+import com.cens.plataforma.logica_proceso.proceso_usuario_empresa.ProcesoUsuarioEmpresa;
 import com.cens.plataforma.usuario.Usuario;
 
 import jakarta.persistence.Column;
@@ -49,9 +50,8 @@ public class Empresa {
     @Column(name = "contacto_emp")
     private String contacto;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user", nullable = true)
-    private Usuario usuario;
+    @OneToMany(mappedBy = "empresa")
+    private Set<ProcesoUsuarioEmpresa> pUE = new HashSet<>();
 
     @OneToMany(mappedBy = "empresa")
     private Set<NotaProceso> notaProceso = new HashSet<>();
@@ -61,7 +61,7 @@ public class Empresa {
     private Etapa etapa;
 
     public Empresa(Long idEmpresa, String rutEmpresa, String nombre, String email, String encargado,
-            String encargadoRun, String razonSocial, String contacto, Usuario usuario) {
+            String encargadoRun, String razonSocial, String contacto) {
         this.idEmpresa = idEmpresa;
         this.rutEmpresa = rutEmpresa;
         this.nombre = nombre;
@@ -70,7 +70,6 @@ public class Empresa {
         this.encargadoRun = encargadoRun;
         this.razonSocial = razonSocial;
         this.contacto = contacto;
-        this.usuario = usuario;
     }
 
     public Empresa() {

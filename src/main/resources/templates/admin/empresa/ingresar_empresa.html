@@ -109,6 +109,12 @@
           <label for="encargadoRun">RUT Encargado:</label>
           <input type="text" id="encargadoRun" name="encargadoRun" th:value="${empresa.encargadoRun}" required>
         </div>
+        <div th:each="pue, iterStat : *{pUE}" class="campo-formulario">
+          <label for="pUE"  th:text="${pue.tipoProceso.nombre}"></label>
+          <select th:id="${pue.usuario}"  name="usuario" required>
+            <option th:each="usuario : ${usuarios}" th:value="${usuario.idUser}" th:selected="${usuario == pue.usuario}" th:text="${usuario.nombre}"></option>
+          </select>
+        </div>
         <button type="submit">Crear Empresa</button>
         <button type="button" onclick="volverAtras()" >Volver</button>
       </form>

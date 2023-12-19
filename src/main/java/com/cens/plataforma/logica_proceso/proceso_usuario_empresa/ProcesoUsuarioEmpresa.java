@@ -1,7 +1,7 @@
 package com.cens.plataforma.logica_proceso.proceso_usuario_empresa;
 
 import com.cens.plataforma.empresa.Empresa;
-import com.cens.plataforma.logica_proceso.proceso.Proceso;
+import com.cens.plataforma.logica_proceso.tipo_proceso.TipoProceso;
 import com.cens.plataforma.usuario.Usuario;
 
 import jakarta.persistence.Column;
@@ -37,5 +37,5 @@ public class ProcesoUsuarioEmpresa {
 
     @ManyToOne
     @JoinColumn(name = "id_proceso", nullable = true)
-    private Proceso proceso;
+    private TipoProceso tipoProceso;
 }

@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.cens.plataforma.rol.Rol;
+
 @Service
 public class UsuarioService {
 	private final UsuarioRepository usuarioRepository;
@@ -22,6 +24,9 @@ public class UsuarioService {
 		return usuarioRepository.findUsuarioByEmail(email);
 	}
 
+	public List<Usuario> getUsuarioByRol(Rol rol){
+		return usuarioRepository.findByRol(rol);
+	}
 	public List<Usuario> getUsuariosNoAdmin(){
 		List<Usuario> usuarios = usuarioRepository.findAll();
 		usuarios.remove(0);

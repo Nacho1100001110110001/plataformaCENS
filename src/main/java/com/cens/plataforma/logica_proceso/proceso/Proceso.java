@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.cens.plataforma.logica_proceso.nota_proceso.NotaProceso;
+import com.cens.plataforma.logica_proceso.proceso_usuario_empresa.ProcesoUsuarioEmpresa;
 import com.cens.plataforma.logica_proceso.tipo_proceso.TipoProceso;
 
 import jakarta.persistence.Column;

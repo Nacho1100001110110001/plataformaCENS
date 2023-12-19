@@ -1,6 +1,11 @@
 package com.cens.plataforma.controladores;
 
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cens.plataforma.empresa.Empresa;
 import com.cens.plataforma.empresa.EmpresaService;
+import com.cens.plataforma.logica_proceso.proceso_usuario_empresa.ProcesoUsuarioEmpresa;
+import com.cens.plataforma.logica_proceso.proceso_usuario_empresa.ProcesoUsuarioEmpresaService;
+import com.cens.plataforma.logica_proceso.tipo_proceso.TipoProceso;
+import com.cens.plataforma.logica_proceso.tipo_proceso.TipoProcesoService;
 import com.cens.plataforma.rol.RolService;
 import com.cens.plataforma.usuario.Usuario;
 import com.cens.plataforma.usuario.UsuarioService;
@@ -27,6 +36,8 @@ public class AdminController {
     private final UsuarioService usuarioService;
     private final RolService rolService;
     private final EmpresaService empresaService;
+    private final TipoProcesoService tipoProcesoService;
+    private final ProcesoUsuarioEmpresaService procesoUsuarioEmpresaService;
 
     @GetMapping("ingresar-usuario")
     public String ingUsuarios(Model model){
@@ -37,7 +48,17 @@ public class AdminController {
 
     @GetMapping("ingresar-empresa")
     public String ingEmpresa(Model model){
-        model.addAttribute("empresa", new Empresa());
+        Empresa empresa = new Empresa();
+        Set<ProcesoUsuarioEmpresa> pues = new HashSet<ProcesoUsuarioEmpresa>();
+        for(TipoProceso p: tipoProcesoService.getTipoProceso()){
+			ProcesoUsuarioEmpresa pue = new ProcesoUsuarioEmpresa();
+			pue.setTipoProceso(p);
+			pues.add(pue);
+		}
+        empresa.setPUE(pues);
+        model.addAttribute("empresa", empresa);
+        List<Usuario> usuarios = usuarioService.getUsuarioByRol(rolService.getRolById(3L));
+        model.addAttribute("usuarios", usuarios);
         return "admin/empresa/ingresar_empresa";
     }
 
@@ -106,12 +127,17 @@ public class AdminController {
         return "admin/empresa/modificar_empresa";
     }
     @PostMapping("empresa")
-    public String registroEmpresa(@ModelAttribute Empresa empresa, Model model){;
-        int error= 2;
+    public String registroEmpresa(@ModelAttribute Empresa empresa, @ModelAttribute ArrayList<ProcesoUsuarioEmpresa> pues, Model model){;
+        int errors= 2;
         if(!empresaService.addNewEmpresa(empresa)){
-            error=1;
+            errors=1;
         }
-        model.addAttribute("error", error);
+        System.out.println("ELPEPEPEPEPE------------------------------------------------" + pues.size());
+        for(ProcesoUsuarioEmpresa p : pues) {
+            p.setEmpresa(empresa);
+            procesoUsuarioEmpresaService.addNewPUE(p);
+        }
+        model.addAttribute("error", errors);
         return "admin/empresa/ingresar_empresa";
     }
     @GetMapping(path = "empresa/del/{idEmpresa}")

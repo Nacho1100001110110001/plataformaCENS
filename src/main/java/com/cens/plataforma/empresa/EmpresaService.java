@@ -8,6 +8,10 @@ import com.cens.plataforma.logica_proceso.nota_proceso.NotaProceso;
 import com.cens.plataforma.logica_proceso.nota_proceso.NotaProcesoService;
 import com.cens.plataforma.logica_proceso.proceso.Proceso;
 import com.cens.plataforma.logica_proceso.proceso.ProcesoService;
+import com.cens.plataforma.logica_proceso.proceso_usuario_empresa.ProcesoUsuarioEmpresa;
+import com.cens.plataforma.logica_proceso.proceso_usuario_empresa.ProcesoUsuarioEmpresaService;
+import com.cens.plataforma.logica_proceso.tipo_proceso.TipoProceso;
+import com.cens.plataforma.logica_proceso.tipo_proceso.TipoProcesoService;
 
 import lombok.AllArgsConstructor;
 
@@ -18,6 +22,8 @@ public class EmpresaService {
     private final EmpresaRepository empresaRepository;
 	private final NotaProcesoService notaProcesoService;
 	private final ProcesoService procesoService;
+	private final TipoProcesoService tipoProcesoService;
+	private final ProcesoUsuarioEmpresaService procesoUsuarioEmpresaService;
 
     public List<Empresa> getEmpresas(){
         return empresaRepository.findAll();
@@ -43,7 +49,6 @@ public class EmpresaService {
 			n.setProceso(p);
 			notaProcesoService.addNewNotaProceso(n);
 		}
-
 		return true;        
     }
 
@@ -62,6 +67,7 @@ public class EmpresaService {
 			throw new IllegalStateException("Empresa con la ID: " + idEmpresa + " no existe.");
 		}
 		notaProcesoService.deleteByIdEmpresa(idEmpresa);
+		procesoUsuarioEmpresaService.deleteByIdEmpresa(idEmpresa);
 		empresaRepository.deleteById(idEmpresa);
     }
 }

@@ -1,5 +1,6 @@
 package com.cens.plataforma;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import com.cens.plataforma.empresa.EmpresaService;
 import com.cens.plataforma.rol.RolService;
 import com.cens.plataforma.usuario.Usuario;
 import com.cens.plataforma.usuario.UsuarioService;
+
 
 @Controller
 @RequestMapping("/")
@@ -26,7 +28,11 @@ public class HtmlController {
     }
 
     @GetMapping
-    public String home(){
+    public String home(Authentication usuario){
+        if(usuario != null){
+            String autoridad = usuario.getAuthorities().iterator().next().getAuthority();
+            if(autoridad.equals("Administrador")) return "admin/home";
+        }
         return "home";
     }
     

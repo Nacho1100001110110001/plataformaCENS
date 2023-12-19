@@ -107,8 +107,8 @@
 
             // Verificar la respuesta
             if (respuesta) {
-                var urlDelet = '/usuario/'+idUsuario;
-                fetch(urlDelet,{method:'DELETE'});
+                var urlDelet = '/usuario/del/'+idUsuario;
+                window.location.href = urlDelet;
                 alert("El usuario "+nombrecito+" se ha eliminado con éxito.");
                 location.reload();
             }

@@ -3,7 +3,6 @@ package com.cens.plataforma.usuario;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.cens.plataforma.empresa.Empresa;
 import com.cens.plataforma.logica_proceso.proceso_usuario_empresa.ProcesoUsuarioEmpresa;
 import com.cens.plataforma.rol.Rol;
 

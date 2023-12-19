@@ -1,6 +1,8 @@
 package com.cens.plataforma.empresa;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.cens.plataforma.etapa.Etapa;
@@ -51,7 +53,7 @@ public class Empresa {
     private String contacto;
 
     @OneToMany(mappedBy = "empresa")
-    private Set<ProcesoUsuarioEmpresa> pUE = new HashSet<>();
+    private List<ProcesoUsuarioEmpresa> pUE = new ArrayList<>();
 
     @OneToMany(mappedBy = "empresa")
     private Set<NotaProceso> notaProceso = new HashSet<>();

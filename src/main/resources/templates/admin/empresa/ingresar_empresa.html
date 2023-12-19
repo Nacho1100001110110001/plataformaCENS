@@ -111,7 +111,7 @@
         </div>
         <div th:each="pue, iterStat : *{pUE}" class="campo-formulario">
           <label for="pUE"  th:text="${pue.tipoProceso.nombre}"></label>
-          <select th:id="${pue.usuario}"  name="usuario" required>
+          <select th:id="${pue.usuario}" th:field="*{pUE.[__${iterStat.index}__]}" name="usuario" required>
             <option th:each="usuario : ${usuarios}" th:value="${usuario.idUser}" th:selected="${usuario == pue.usuario}" th:text="${usuario.nombre}"></option>
           </select>
         </div>

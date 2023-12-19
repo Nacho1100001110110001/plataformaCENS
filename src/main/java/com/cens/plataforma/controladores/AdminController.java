@@ -49,7 +49,7 @@ public class AdminController {
     @GetMapping("ingresar-empresa")
     public String ingEmpresa(Model model){
         Empresa empresa = new Empresa();
-        Set<ProcesoUsuarioEmpresa> pues = new HashSet<ProcesoUsuarioEmpresa>();
+        List<ProcesoUsuarioEmpresa> pues = new ArrayList<ProcesoUsuarioEmpresa>();
         for(TipoProceso p: tipoProcesoService.getTipoProceso()){
 			ProcesoUsuarioEmpresa pue = new ProcesoUsuarioEmpresa();
 			pue.setTipoProceso(p);
@@ -127,16 +127,16 @@ public class AdminController {
         return "admin/empresa/modificar_empresa";
     }
     @PostMapping("empresa")
-    public String registroEmpresa(@ModelAttribute Empresa empresa, @ModelAttribute ArrayList<ProcesoUsuarioEmpresa> pues, Model model){;
+    public String registroEmpresa(@ModelAttribute Empresa empresa, Model model){;
         int errors= 2;
         if(!empresaService.addNewEmpresa(empresa)){
             errors=1;
         }
-        System.out.println("ELPEPEPEPEPE------------------------------------------------" + pues.size());
-        for(ProcesoUsuarioEmpresa p : pues) {
-            p.setEmpresa(empresa);
-            procesoUsuarioEmpresaService.addNewPUE(p);
-        }
+        System.out.println("ELPEPEPEPEPE------------------------------------------------" + empresa.getPUE().size());
+        // for(ProcesoUsuarioEmpresa p : pues) {
+        //     p.setEmpresa(empresa);
+        //     procesoUsuarioEmpresaService.addNewPUE(p);
+        // }
         model.addAttribute("error", errors);
         return "admin/empresa/ingresar_empresa";
     }

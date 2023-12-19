@@ -2,17 +2,22 @@ package com.cens.plataforma.empresa;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.stereotype.Service;
+
+import com.cens.plataforma.logica_proceso.nota_proceso.NotaProceso;
+import com.cens.plataforma.logica_proceso.nota_proceso.NotaProcesoService;
+import com.cens.plataforma.logica_proceso.proceso.Proceso;
+import com.cens.plataforma.logica_proceso.proceso.ProcesoService;
+
+import lombok.AllArgsConstructor;
 
 
 @Service
+@AllArgsConstructor
 public class EmpresaService {
     private final EmpresaRepository empresaRepository;
-
-    public EmpresaService(EmpresaRepository empresaRepository) {
-        this.empresaRepository = empresaRepository;
-    }
+	private final NotaProcesoService notaProcesoService;
+	private final ProcesoService procesoService;
 
     public List<Empresa> getEmpresas(){
         return empresaRepository.findAll();
@@ -32,13 +37,19 @@ public class EmpresaService {
 			return false;
 		}
 		empresaRepository.save(empresa);
+		for(Proceso p : procesoService.getProcesos()){
+			NotaProceso n = new NotaProceso();
+			n.setEmpresa(empresa);
+			n.setProceso(p);
+			notaProcesoService.addNewNotaProceso(n);
+		}
+
 		return true;        
     }
 
     public boolean modificarEmpresa(Empresa empresa){
 		Optional<Empresa> empresaByRut = empresaRepository.findEmpresaByRutEmpresa(empresa.getRutEmpresa());
 		if(empresaByRut.isPresent() && empresa.getIdEmpresa() != empresaByRut.get().getIdEmpresa()){
-			System.out.println("Empresa encontrada: " + empresaByRut+ "\nEmpresa 1 id: "+ empresa.getIdEmpresa() + " Empresa 2 id: "+ empresaByRut.get().getIdEmpresa());
 			return false;
 		}
 		empresaRepository.save(empresa);
@@ -50,6 +61,7 @@ public class EmpresaService {
 		if(!existe){
 			throw new IllegalStateException("Empresa con la ID: " + idEmpresa + " no existe.");
 		}
+		notaProcesoService.deleteByIdEmpresa(idEmpresa);
 		empresaRepository.deleteById(idEmpresa);
     }
 }

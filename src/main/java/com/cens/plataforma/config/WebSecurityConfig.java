@@ -9,16 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
-    
-    // @Bean
-    // public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-    //     return http.httpBasic().and()
-    //     .authorizeHttpRequests()
-    //     .anyRequest()
-    //     .authenticated()
-    //     .and()
-    //     .build();
-    // }
 
     @Bean
     public PasswordEncoder passwordEncoder(){

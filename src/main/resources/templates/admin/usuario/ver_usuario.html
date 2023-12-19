@@ -96,7 +96,7 @@
 
   <script>
     function modificarUsuario(idUsuario) {
-      var urlMod = '/modificar-usuario/'+idUsuario;
+      var urlMod = '/admin/modificar-usuario/'+idUsuario;
       window.location.href = urlMod;
     }
 
@@ -107,7 +107,7 @@
 
             // Verificar la respuesta
             if (respuesta) {
-                var urlDelet = '/usuario/del/'+idUsuario;
+                var urlDelet = '/admin/usuario/del/'+idUsuario;
                 window.location.href = urlDelet;
                 alert("El usuario "+nombrecito+" se ha eliminado con éxito.");
                 location.reload();

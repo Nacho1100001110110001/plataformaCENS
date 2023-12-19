@@ -74,7 +74,7 @@
     <h2>Formulario de Modificación de Empresa</h2>
 
     <div class="formulario">
-      <form th:action="@{/empresa/mod}" th:method="post" th:object="${empresa}">
+      <form th:action="@{/admin/empresa/mod}" th:method="post" th:object="${empresa}">
         <div class="campo-formulario">
           <label for="rutEmpresa">RUT Empresa:</label>
           <input type="hidden" id="idEmpresa" th:value="${empresa.idEmpresa}" name="idEmpresa" required>
@@ -121,7 +121,7 @@
 
     }
     function volverAtras() {
-      window.location.href = "/empresa";
+      window.location.href = "/admin/empresa";
     }
     function errorcito(){
       var valorError= document.getElementById('contenedor').getAttribute('errorcito');

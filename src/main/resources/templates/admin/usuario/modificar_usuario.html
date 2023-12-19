@@ -74,7 +74,7 @@
     <h2>Formulario de Modificación de Usuario</h2>
 
     <div class="formulario">
-      <form th:action="@{/usuario/mod}" th:method="POST" th:object="${usuario}">
+      <form th:action="@{/admin/usuario/mod}" th:method="POST" th:object="${usuario}">
         <div class="campo-formulario">
           <label for="nombre">Nombre:</label>
           <input type="hidden" id="idUser" th:value="${usuario.idUser}" name="idUser" required>
@@ -113,7 +113,7 @@
   <script>
     
     function volverAtras() {
-      window.location.href = "/usuario";
+      window.location.href = "/admin/usuario";
     }
     function errorcito(){
       var valorError= document.getElementById('contenedor').getAttribute('errorcito');

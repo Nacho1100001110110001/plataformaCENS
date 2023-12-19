@@ -101,7 +101,7 @@
 
   <script>
     function modificarEmpresa(idEmpresa) {
-      var urlMod = 'modificar-empresa/' + idEmpresa;
+      var urlMod = '/admin/modificar-empresa/' + idEmpresa;
       window.location.href = urlMod;
     }
 
@@ -112,7 +112,7 @@
 
             // Verificar la respuesta
             if (respuesta) {
-                var urlDelet = '/empresa/del/'+idEmpresa;
+                var urlDelet = '/admin/empresa/del/'+idEmpresa;
                 window.location.href = urlDelet
                 alert("La empresa "+nombrecito+" se ha eliminado con éxito.");
                 location.reload();
